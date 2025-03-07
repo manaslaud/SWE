@@ -1,0 +1,34 @@
+@startuml component_diagram
+title Rekindle Application - Component Diagram
+
+' Defining Components
+component "Frontend (Next.js)" as Frontend
+component "Backend API (Express.js)" as Backend
+component "Database (MongoDB)" as Database
+component "Emotion Analysis Engine (Intel AI Toolkit)" as EmotionAI
+component "Authentication Service (JWT & OAuth)" as AuthService
+component "Admin Dashboard" as AdminDashboard
+component "Logging Service" as LoggingService
+
+' Interfaces
+interface "REST API" as RestAPI
+interface "Database Connector" as DBConnector
+interface "AI API" as AIInterface
+interface "Auth API" as AuthAPI
+interface "Logging API" as LogAPI
+
+' Connecting Components through Interfaces
+Frontend -- RestAPI : Uses >
+Backend -- DBConnector : Uses >
+Backend -- AIInterface : Uses >
+Backend -- AuthAPI : Uses >
+Backend -- LogAPI : Sends Logs >
+
+' Direct Connections
+Backend --> Database : Stores & Retrieves Data
+Backend --> EmotionAI : Sends Journal Text for Emotion Analysis
+Backend --> AuthService : Handles Authentication
+Backend --> LoggingService : Sends System Logs
+AdminDashboard --> Backend : Manages Users & Logs
+
+@enduml

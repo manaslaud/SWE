@@ -1,0 +1,81 @@
+@startuml crc_card
+title Rekindle Application - CRC Diagram
+
+' User CRC Card
+class User {
+    **Responsibilities:** 
+    - Register and Login 
+    - Manage Profile 
+    - Write Journal Entries 
+
+    **Collaborators:** 
+    - JournalEntry
+    - Search
+    - Visualization
+}
+
+' Journal Entry CRC Card
+class JournalEntry {
+    **Responsibilities:** 
+    - Create, Edit, Delete Entries 
+    - Store Journal Content 
+
+    **Collaborators:** 
+    - User
+    - EmotionAnalysis
+}
+
+' Emotion Analysis CRC Card
+class EmotionAnalysis {
+    **Responsibilities:** 
+    - Analyze Journal Text for Emotions 
+    - Store Detected Emotions 
+
+    **Collaborators:** 
+    - JournalEntry
+}
+
+' Search CRC Card
+class Search {
+    **Responsibilities:** 
+    - Search Journal Entries 
+    - Filter Results 
+
+    **Collaborators:** 
+    - User
+    - JournalEntry
+}
+
+' Visualization CRC Card
+class Visualization {
+    **Responsibilities:** 
+    - Generate Emotion Trends 
+    - Export Reports 
+
+    **Collaborators:** 
+    - User
+    - EmotionAnalysis
+}
+
+' Admin CRC Card
+class Admin {
+    **Responsibilities:** 
+    - Manage User Accounts 
+    - Monitor System Logs 
+
+    **Collaborators:** 
+    - User
+    - JournalEntry
+}
+
+' Relationships Between Classes
+User --> JournalEntry
+User --> Search
+User --> Visualization
+JournalEntry --> EmotionAnalysis
+Search --> JournalEntry
+Visualization --> EmotionAnalysis
+Admin --> User
+Admin --> JournalEntry
+
+@enduml

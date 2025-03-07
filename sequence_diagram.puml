@@ -1,0 +1,54 @@
+@startuml sequenece_diagram
+title Rekindle Application - Sequence Diagram
+
+actor User
+actor Admin
+
+participant "Rekindle System" as System
+participant "Database" as DB
+participant "Emotion Analysis Engine" as AI
+
+User -> System: Register()
+System -> DB: Store User Data
+DB --> System: Registration Successful
+System --> User: Send Verification Email
+
+User -> System: Login(email, password)
+System -> DB: Validate Credentials
+DB --> System: Login Success
+System --> User: Access Granted
+
+User -> System: Create Journal Entry(content)
+System -> DB: Save Journal Entry
+System -> AI: Analyze Emotions(content)
+AI --> System: Detected Emotions
+System -> DB: Store Emotion Analysis
+System --> User: Entry Saved with Emotion Tags
+
+User -> System: Search Journal(query)
+System -> DB: Fetch Matching Entries
+DB --> System: Return Search Results
+System --> User: Display Results
+
+User -> System: Generate Emotion Trends()
+System -> DB: Retrieve Emotion Data
+System -> AI: Process Emotion Trends
+AI --> System: Return Trend Graphs
+System --> User: Display Visualizations
+
+User -> System: Logout()
+System --> User: Session Terminated
+
+Admin -> System: Manage Users()
+System -> DB: Fetch User List
+DB --> System: Return User List
+Admin -> System: Modify User Data
+System -> DB: Update User Record
+System --> Admin: Changes Applied
+
+Admin -> System: Monitor System Logs()
+System -> DB: Fetch System Logs
+DB --> System: Return Log Data
+System --> Admin: Display Logs
+
+@enduml

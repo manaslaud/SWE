@@ -1,0 +1,48 @@
+@startuml collaboration_diagram
+title Rekindle Application - Vertical Collaboration Diagram
+
+' Defining Objects (Vertical Layout)
+User -> RekindleSystem : Register()
+RekindleSystem -> Database : Store User Data
+Database --> RekindleSystem : Registration Successful
+RekindleSystem --> User : Send Verification Email
+
+User -> RekindleSystem : Login(email, password)
+RekindleSystem -> Database : Validate Credentials
+Database --> RekindleSystem : Login Successful
+RekindleSystem --> User : Access Granted
+
+User -> RekindleSystem : Create Journal Entry(content)
+RekindleSystem -> Database : Save Entry
+RekindleSystem -> EmotionAnalysisEngine : Analyze Emotions(content)
+EmotionAnalysisEngine --> RekindleSystem : Detected Emotions
+RekindleSystem -> Database : Store Emotion Analysis
+RekindleSystem --> User : Entry Saved with Emotion Tags
+
+User -> RekindleSystem : SearchJournal(query)
+RekindleSystem -> Database : Fetch Matching Entries
+Database --> RekindleSystem : Return Search Results
+RekindleSystem --> User : Display Search Results
+
+User -> RekindleSystem : Generate Emotion Trends()
+RekindleSystem -> Database : Retrieve Emotion Data
+RekindleSystem -> EmotionAnalysisEngine : Process Emotion Trends
+EmotionAnalysisEngine --> RekindleSystem : Return Trend Graphs
+RekindleSystem --> User : Display Graphs and Charts
+
+User -> RekindleSystem : Logout()
+RekindleSystem --> User : Session Terminated
+
+Admin -> RekindleSystem : Manage Users
+RekindleSystem -> Database : Fetch User List
+Database --> RekindleSystem : Return User List
+Admin -> RekindleSystem : Modify User Data
+RekindleSystem -> Database : Update User Record
+RekindleSystem --> Admin : Changes Applied
+
+Admin -> RekindleSystem : Monitor System Logs
+RekindleSystem -> Database : Fetch System Logs
+Database --> RekindleSystem : Return Log Data
+RekindleSystem --> Admin : Display Logs
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml state_diagram
+title Rekindle Application - State Chart Diagram
+
+[*] --> NotRegistered
+
+state NotRegistered {
+    [*] --> Registering
+    Registering --> Registered : Registration Complete
+}
+
+Registered --> LoggedOut : User Logs Out
+Registered --> LoggedIn : User Logs In
+
+state LoggedIn {
+    [*] --> ViewingDashboard
+    ViewingDashboard --> WritingJournal : Create Journal Entry
+    WritingJournal --> AnalyzingEmotion : Submit Journal Entry
+    AnalyzingEmotion --> ViewingJournal : Analysis Complete
+    ViewingJournal --> SearchingJournal : User Searches Entries
+    SearchingJournal --> FilteringResults : Apply Filters
+    ViewingJournal --> LoggingOut : User Logs Out
+}
+
+FilteringResults --> ViewingJournal : Filters Applied
+LoggingOut --> LoggedOut : Logout Successful
+LoggedOut --> LoggedIn : User Logs In Again
+
+[*] --> AdminMode : Admin Logs In
+AdminMode --> ManagingUsers : Manage Users
+AdminMode --> MonitoringLogs : View System Logs
+ManagingUsers --> AdminMode : Return to Admin Dashboard
+MonitoringLogs --> AdminMode : Return to Admin Dashboard
+AdminMode --> LoggedOut : Admin Logs Out
+
+@enduml

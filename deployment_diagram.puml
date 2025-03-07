@@ -1,0 +1,40 @@
+@startuml deployment_diagram
+title Rekindle Application - Deployment Diagram
+
+' Define Nodes
+node "User Device (Client)" as Client {
+    artifact "Web Application (Next.js)" as WebApp
+    artifact "Browser" as Browser
+}
+
+node "Load Balancer" as LB {
+    artifact "NGINX" as Nginx
+}
+
+node "Application Server" as AppServer {
+    artifact "Backend API (Express.js)" as Backend
+    artifact "Authentication Service (JWT & OAuth)" as AuthService
+    artifact "Logging Service" as LoggingService
+}
+
+node "Database Server" as DBServer {
+    artifact "MongoDB Database" as Database
+}
+
+node "AI Processing Server" as AIServer {
+    artifact "Emotion Analysis Engine (Intel AI Toolkit)" as EmotionAI
+}
+
+node "Admin Server" as AdminServer {
+    artifact "Admin Dashboard" as AdminDashboard
+}
+
+' Connections
+Client --> LB : HTTP/HTTPS Request
+LB --> AppServer : Forward Requests (Load Balancing)
+AppServer --> DBServer : Read/Write Data (MongoDB)
+AppServer --> AIServer : Send Journal Data for Emotion Analysis
+AppServer --> LoggingService : Store System Logs
+AdminServer --> AppServer : Manage Users & Monitor Logs
+
+@enduml

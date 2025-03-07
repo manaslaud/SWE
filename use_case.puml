@@ -1,0 +1,61 @@
+@startuml use_case
+title Use Case Diagram - Rekindle
+
+actor "User" as U
+actor "Admin" as A
+
+rectangle Rekindle {
+
+    ' User Authentication
+    usecase "Register" as UC1
+    usecase "Login" as UC2
+    usecase "Manage Profile" as UC3
+    usecase "Reset Password" as UC4
+    
+    ' Journal Management
+    usecase "Create Journal Entry" as UC5
+    usecase "Edit Journal Entry" as UC6
+    usecase "Delete Journal Entry" as UC7
+    usecase "View Journal Entries" as UC8
+
+    ' Emotion Analysis
+    usecase "Analyze Emotions" as UC9
+    usecase "Tag Emotions" as UC10
+    usecase "Store Analysis" as UC11
+
+    ' Search & Retrieval
+    usecase "Search Journal" as UC12
+    usecase "Filter Results" as UC13
+
+    ' Visualization
+    usecase "Generate Emotion Trends" as UC14
+    usecase "Export Reports" as UC15
+
+    ' Admin Privileges
+    usecase "Manage Users" as UC16
+    usecase "Monitor System Logs" as UC17
+
+    ' Relationships
+    UC2 --> UC4 : <<extend>> 
+    UC5 --> UC9 : <<include>> 
+    UC9 --> UC10 : <<include>> 
+    UC10 --> UC11 : <<include>> 
+    UC12 --> UC13 : <<extend>> 
+    UC14 --> UC15 : <<extend>> 
+
+    ' Actor Relationships
+    U --> UC1
+    U --> UC2
+    U --> UC3
+    U --> UC5
+    U --> UC6
+    U --> UC7
+    U --> UC8
+    U --> UC12
+    U --> UC14
+
+    A --> UC16
+    A --> UC17
+}
+
+@enduml

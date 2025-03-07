@@ -1,0 +1,57 @@
+@startuml swim_lane
+|User|
+start
+:Open Application;
+:Login/Register;
+if (New User?) then (Yes)
+    :Enter Credentials;
+    :Submit Registration;
+    |System|
+    :Validate Credentials;
+    :Store User Data in Database;
+    :Send Verification Email;
+    |User|
+    :Verify Email;
+    |System|
+    :Activate Account;
+endif
+
+|User|
+:Login to Account;
+|System|
+:Validate Credentials;
+:Grant Access;
+:Display Dashboard;
+
+|User|
+:Create Journal Entry;
+:Write Daily Reflection;
+:Submit Entry;
+|System|
+:Store Entry in Database;
+|AI Engine|
+:Analyze Text for Emotions;
+|System|
+:Tag Detected Emotions;
+:Store Analysis Results;
+
+|User|
+:View Journal Entries;
+|System|
+:Retrieve Entries from Database;
+:Display Entries with Emotion Tags;
+
+|User|
+:Search for Past Entries;
+|System|
+:Fetch Relevant Entries;
+:Display Search Results;
+
+|User|
+:View Emotion Trends;
+|System|
+:Generate Visualization;
+:Display Graphs and Charts;
+
+stop
+@enduml

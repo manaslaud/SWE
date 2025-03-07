@@ -1,0 +1,70 @@
+@startuml class_diagram
+title Class Diagram - Rekindle Application
+
+' User Class
+class User {
+    + userID : int
+    + name : string
+    + email : string
+    + password : string
+    + profilePicture : string
+    + dateCreated : Date
+    + lastLogin : Date
+    + register()
+    + login()
+    + updateProfile()
+}
+
+' Journal Entry Class
+class JournalEntry {
+    + entryID : int
+    + userID : int
+    + date : Date
+    + content : text
+    + emotionTags : string
+    + dateCreated : Date
+    + lastModified : Date
+    + createEntry()
+    + editEntry()
+    + deleteEntry()
+}
+
+' Emotion Analysis Class
+class EmotionAnalysis {
+    + analysisID : int
+    + entryID : int
+    + detectedEmotion : string
+    + confidenceScore : float
+    + analysisDate : Date
+    + analyzeText()
+    + storeAnalysis()
+}
+
+' Search Class
+class Search {
+    + searchQuery : string
+    + dateRange : Date
+    + filterByEmotion(emotion: string)
+    + executeSearch()
+}
+
+' Visualization Class
+class Visualization {
+    + generateEmotionTrends()
+    + exportReport()
+}
+
+' Admin Class
+class Admin {
+    + adminID : int
+    + manageUsers()
+    + monitorSystemLogs()
+}
+
+' Relationships and Multiplicity
+User "1" -- "0..*" JournalEntry : creates
+JournalEntry "1" -- "0..1" EmotionAnalysis : analyzed by
+User "1" -- "0..*" Search : performs
+User "1" -- "0..*" Visualization : views
+Admin "1" -- "0..*" User : manages
+Admin "1" -- "0..*" JournalEntry : monitors

@@ -1,0 +1,71 @@
+@startuml structure_chart
+title Rekindle System Structure Chart
+
+' Main System (Control Module)
+rectangle "Rekindle Application" {
+  
+    ' User Management Module
+    rectangle "User Management" {
+        rectangle "User Registration"
+        rectangle "User Login"
+        rectangle "User Profile Management"
+    }
+  
+    ' Journal Management Module
+    rectangle "Journal Management" {
+        rectangle "Create Journal Entry"
+        rectangle "Edit Journal Entry"
+        rectangle "Delete Journal Entry"
+        rectangle "View Journal Entries"
+    }
+  
+    ' Emotion Analysis Module
+    rectangle "Emotion Analysis" {
+        rectangle "Analyze Text for Emotions"
+        rectangle "Tag Detected Emotions"
+        rectangle "Store Analysis Results"
+    }
+  
+    ' Search & Retrieval Module
+    rectangle "Search & Retrieval" {
+        rectangle "Search Journal Entries"
+        rectangle "Filter Search Results"
+    }
+
+    ' Visualization Module
+    rectangle "Visualization" {
+        rectangle "Generate Emotion Trends"
+        rectangle "Display Graphs & Charts"
+        rectangle "Export Reports"
+    }
+
+    ' System Services (Control Module)
+    rectangle "System Services" {
+        rectangle "Authentication & Authorization"
+        rectangle "Data Storage & Management"
+        rectangle "Security & Privacy Enforcement"
+        rectangle "User Notifications"
+    }
+
+    ' Physical Storage (Data Store)
+    database "User Database"
+    database "Journal Entries Database"
+    database "Emotion Analysis Database"
+
+    ' Connect modules to storage using Data Flow
+    "User Registration" --> "User Database" : Data Flow
+    "Journal Management" --> "Journal Entries Database" : Data Flow
+    "Emotion Analysis" --> "Emotion Analysis Database" : Data Flow
+
+    ' Control Flow with Conditional Calls
+    "User Login" --> "Authentication & Authorization" : Control Flow
+    "Journal Management" --> "Emotion Analysis" : Conditional Call
+    "Search & Retrieval" --> "Journal Management" : Conditional Call
+
+    ' Loop for repetitive journal analysis
+    "Analyze Text for Emotions" -[hidden]-> "Tag Detected Emotions"
+    "Tag Detected Emotions" -[hidden]-> "Store Analysis Results"
+    note left: Loop (Emotion Analysis)
+}
+
+@enduml

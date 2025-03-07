@@ -1,4 +1,3 @@
-Here’s a **Use Case Description** for all the use cases from the **Rekindle Use Case Diagram**, following a standard **Use Case Template**.
 
 ---
 
@@ -131,4 +130,3 @@ Here’s a **Use Case Description** for all the use cases from the **Rekindle Us
   - Example: `Reset Password` **extends** `Login` (only triggered when login fails).
   - `Filter Results` **extends** `Search Journal` (optional filter).
 
-This **structured use case description** aligns with the **Use Case Diagram**. Let me know if you need **modifications or additions!** 🚀

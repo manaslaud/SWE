@@ -1,0 +1,26 @@
+@startuml interaction
+actor Manager
+actor "Delivery Person" as DeliveryPerson
+actor Customer
+participant "Newspaper System" as System
+
+Customer -> System : Subscribe to newspaper
+System -> Customer : Subscription Confirmation
+
+Customer -> System : Modify subscription
+System -> Customer : Subscription Updated
+
+Customer -> System : Request temporary stop
+System -> Customer : Delivery Halted
+
+System -> DeliveryPerson : Generate delivery list
+DeliveryPerson -> System : Confirm delivery
+
+System -> Manager : Generate monthly report
+Manager -> System : Verify and approve
+
+System -> Customer : Generate monthly bill
+Customer -> System : Make payment
+System -> Customer : Payment receipt
+
+@enduml

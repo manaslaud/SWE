@@ -1,4 +1,5 @@
 @startuml component
+
 package "Newspaper Agency System" {
     [User Interface] 
     [Subscription Management] 
@@ -8,14 +9,26 @@ package "Newspaper Agency System" {
     [Database]
 }
 
-[User Interface] --> [Subscription Management] : Manages subscription
-[User Interface] --> [Billing System] : View bills
-[User Interface] --> [Delivery Management] : Track delivery
-[User Interface] --> [Report Generation] : View reports
+interface ISubscription
+interface IBilling
+interface IDelivery
+interface IReport
+interface IDataStore
 
-[Subscription Management] --> [Database] : Stores subscription data
-[Billing System] --> [Database] : Stores billing info
-[Delivery Management] --> [Database] : Stores delivery data
-[Report Generation] --> [Database] : Fetches report data
+[User Interface] --> ISubscription : Manages subscription
+[User Interface] --> IBilling : View bills
+[User Interface] --> IDelivery : Track delivery
+[User Interface] --> IReport : View reports
+
+ISubscription - [Subscription Management]
+IBilling - [Billing System]
+IDelivery - [Delivery Management]
+IReport - [Report Generation]
+IDataStore - [Database]
+
+[Subscription Management] --> IDataStore : Stores subscription data
+[Billing System] --> IDataStore : Stores billing info
+[Delivery Management] --> IDataStore : Stores delivery data
+[Report Generation] --> IDataStore : Fetches report data
 
 @enduml
